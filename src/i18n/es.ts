@@ -197,7 +197,7 @@ export const es: Translation = {
     items: [
       { name: 'Español', level: 'Nativo' },
       { name: 'Chino', level: 'Nativo' },
-      { name: 'Inglés', level: 'B2' },
+      { name: 'Inglés', level: 'Intermedio' },
     ],
     extraTitle: 'Otros',
     extra: ['Permiso de conducir tipo B', 'Gran Canaria, España'],

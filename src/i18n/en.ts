@@ -196,7 +196,7 @@ export const en: Translation = {
     items: [
       { name: 'Spanish', level: 'Native' },
       { name: 'Chinese', level: 'Native' },
-      { name: 'English', level: 'B2' },
+      { name: 'English', level: 'Intermediate' },
     ],
     extraTitle: 'Other',
     extra: ['Driving licence (B)', 'Gran Canaria, Spain'],

@@ -207,7 +207,7 @@ export const zh: Translation = {
     items: [
       { name: '西班牙语', level: '母语' },
       { name: '中文', level: '母语' },
-      { name: '英语', level: 'B2' },
+      { name: '英语', level: '中级' },
     ],
     extraTitle: '其他',
     extra: ['B 类驾照', '西班牙大加那利岛'],
