@@ -241,8 +241,10 @@ export function initMascot(mount: HTMLElement): void {
     armL.rotation.x = swing * 0.45;
     armL.rotation.z = 0.16 + Math.cos(t * 1.6) * 0.14;
 
-    const wave = hover * (-2.15 + Math.sin(t * 10) * 0.35);
-    armR.rotation.x = -swing * 0.45 * (1 - hover);
+    // Saludo: brazo arriba y hacia AFUERA (junto a la cabeza, no detrás),
+    // con un ligero giro hacia la cámara para que salude "mirándote".
+    const wave = hover * (2.3 + Math.sin(t * 8) * 0.35);
+    armR.rotation.x = -swing * 0.45 * (1 - hover) + hover * 0.25;
     armR.rotation.z = (-0.16 - Math.cos(t * 1.6) * 0.14) * (1 - hover) + wave;
 
     // Parpadeo cada ~3,6 s.
