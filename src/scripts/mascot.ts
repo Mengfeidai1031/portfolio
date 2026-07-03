@@ -99,15 +99,20 @@ export function initMascot(mount: HTMLElement): void {
 
   head.add(skull, face, eyeL, eyeR, earL, earR, antenna);
 
+  // Cada brazo cuelga de un pivote en el hombro: así las rotaciones se ven
+  // como un péndulo natural y no como un giro raro sobre el centro del brazo.
   const armGeo = new THREE.CapsuleGeometry(0.14, 0.46, 4, 12);
-  const armL = new THREE.Mesh(armGeo, bodyMat);
-  armL.position.set(-0.98, 0.1, 0);
-  armL.rotation.z = 0.28;
-  armL.castShadow = true;
-  const armR = new THREE.Mesh(armGeo, bodyMat);
-  armR.position.set(0.98, 0.1, 0);
-  armR.rotation.z = -0.28;
-  armR.castShadow = true;
+  const makeArm = (side: 1 | -1) => {
+    const pivot = new THREE.Group();
+    pivot.position.set(side * 0.92, 0.42, 0);
+    const mesh = new THREE.Mesh(armGeo, bodyMat);
+    mesh.position.y = -0.34;
+    mesh.castShadow = true;
+    pivot.add(mesh);
+    return pivot;
+  };
+  const armL = makeArm(-1);
+  const armR = makeArm(1);
 
   robot.add(body, belly, bellyLight, head, armL, armR);
   robot.position.y = 0.35;
@@ -230,11 +235,15 @@ export function initMascot(mount: HTMLElement): void {
     // Antena: balanceo idle + giro extra en hover.
     antenna.rotation.z = Math.sin(t * 2.4) * 0.1 + hover * Math.sin(t * 9) * 0.25;
 
-    // Brazos: balanceo suave; el derecho saluda en hover.
-    armL.rotation.x = Math.sin(t * 1.6) * 0.14;
-    const wave = hover * (-2.1 + Math.sin(t * 10) * 0.35);
-    armR.rotation.z = -0.28 + wave;
-    armR.rotation.x = Math.sin(t * 1.6 + Math.PI) * 0.14 * (1 - hover);
+    // Brazos: péndulo en contrafase, visible desde la cámara
+    // (X = adelante/atrás, Z = abrir/cerrar). El derecho saluda en hover.
+    const swing = Math.sin(t * 1.6);
+    armL.rotation.x = swing * 0.45;
+    armL.rotation.z = 0.16 + Math.cos(t * 1.6) * 0.14;
+
+    const wave = hover * (-2.15 + Math.sin(t * 10) * 0.35);
+    armR.rotation.x = -swing * 0.45 * (1 - hover);
+    armR.rotation.z = (-0.16 - Math.cos(t * 1.6) * 0.14) * (1 - hover) + wave;
 
     // Parpadeo cada ~3,6 s.
     const cycle = t % 3.6;
