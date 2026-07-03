@@ -235,25 +235,24 @@ export function initMascot(mount: HTMLElement): void {
     // Antena: balanceo idle + giro extra en hover.
     antenna.rotation.z = Math.sin(t * 2.4) * 0.1 + hover * Math.sin(t * 9) * 0.25;
 
-    // Brazos en reposo: balanceo lateral (eje Z, en el plano de la pantalla)
-    // en espejo perfecto entre los dos, combinando dos frecuencias para que
-    // no se note repetitivo. Un pequeño matiz de profundidad (eje X) se
-    // aplica EN SINCRONÍA (mismo signo en ambos brazos, no en contrafase):
-    // así se mueven juntos, "respirando", sin que ninguno parezca quedarse
-    // atrás respecto al otro.
-    const swayMain = Math.sin(t * 1.3) * 0.17;
-    const swaySecondary = Math.sin(t * 0.7 + 1.1) * 0.06;
-    const idleSway = swayMain + swaySecondary;
-    const idleBob = Math.sin(t * 1.3 + Math.PI / 2) * 0.08;
+    // Brazos en reposo: balanceo de delante hacia atrás (eje X, profundidad),
+    // EN SINCRONÍA entre los dos brazos — mismo signo, mismo instante — como
+    // un péndulo que se mueve junto. (Nota: si el eje X se anima en contrafase
+    // entre ambos brazos, o se combina con el eje Z a la misma frecuencia con
+    // desfase, el resultado se lee como un giro circular o un hombro
+    // desplazado — por eso aquí solo hay UN eje animado y en sincronía.)
+    const swingMain = Math.sin(t * 1.3) * 0.24;
+    const swingSecondary = Math.sin(t * 0.7 + 1.1) * 0.08;
+    const idleSwing = swingMain + swingSecondary;
 
-    armL.rotation.x = idleBob;
-    armL.rotation.z = 0.16 + idleSway;
+    armL.rotation.x = idleSwing;
+    armL.rotation.z = 0.16;
 
     // Saludo: brazo arriba y hacia AFUERA (junto a la cabeza, no detrás),
     // con un ligero giro hacia la cámara para que salude "mirándote".
     const wave = hover * (2.3 + Math.sin(t * 8) * 0.35);
-    armR.rotation.x = idleBob * (1 - hover) + hover * 0.25;
-    armR.rotation.z = (-0.16 - idleSway) * (1 - hover) + wave;
+    armR.rotation.x = idleSwing * (1 - hover) + hover * 0.25;
+    armR.rotation.z = -0.16 * (1 - hover) + wave;
 
     // Parpadeo cada ~3,6 s.
     const cycle = t % 3.6;
