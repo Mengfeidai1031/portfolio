@@ -1,0 +1,90 @@
+---
+// Layout base: <head> con SEO por idioma, fuentes autoalojadas,
+// script de tema anti-FOUC y carga diferida de los scripts del cliente.
+import '@fontsource-variable/inter';
+import '@fontsource-variable/noto-sans-sc';
+import '../styles/global.css';
+
+import Navbar from '../components/Navbar.astro';
+import { htmlLang, localePath, locales, useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const site = Astro.site!.href.replace(/\/$/, '');
+const canonical = `${site}${localePath(locale)}`;
+---
+
+<!doctype html>
+<html lang={htmlLang[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <meta name="author" content="Meng Fei Dai" />
+    <link rel="canonical" href={canonical} />
+
+    {/* Alternativas de idioma para buscadores */}
+    {locales.map((l) => (
+      <link rel="alternate" hreflang={htmlLang[l]} href={`${site}${localePath(l)}`} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${site}/`} />
+
+    {/* Open Graph / Twitter */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meng Fei Dai" />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={t.meta.ogLocale} />
+    <meta property="og:image" content={`${site}/og.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0a0a0f" />
+
+    {/* Aplica el tema guardado ANTES del primer pintado para evitar parpadeo */}
+    <script is:inline>
+      (function () {
+        // Oscuro por defecto; claro solo si el usuario lo eligió antes.
+        try {
+          if (localStorage.getItem('theme') === 'light')
+            document.documentElement.setAttribute('data-theme', 'light');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{t.a11y.skip}</a>
+
+    <Navbar locale={locale} t={t} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© 2026 Meng Fei Dai — {t.contact.footerNote}</span>
+        <a href="https://github.com/Mengfeidai1031/portfolio" target="_blank" rel="noopener noreferrer">
+          {t.contact.footerSource}
+        </a>
+      </div>
+    </footer>
+
+    {/* Punto de entrada del cliente: UI + escenas 3D con carga diferida */}
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

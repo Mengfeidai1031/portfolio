@@ -1,0 +1,50 @@
+---
+// Sobre mí + mascota robot 3D (montada en #mascot-mount por scripts/mascot.ts).
+import Icon from './Icon.astro';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="kicker">01</p>
+      <h2>{t.about.title}</h2>
+    </div>
+
+    <div class="about-grid">
+      <div data-reveal>
+        <p>{t.about.p1}</p>
+        <p>{t.about.p2}</p>
+
+        <div class="about-facts">
+          <div class="fact">
+            <Icon name="map-pin" size={17} />
+            <span>{t.about.facts.location}</span>
+          </div>
+          <div class="fact">
+            <Icon name="briefcase" size={17} />
+            <span>{t.about.facts.role}</span>
+          </div>
+          <div class="fact">
+            <Icon name="graduation-cap" size={17} />
+            <span>{t.about.facts.degree}</span>
+          </div>
+          <div class="fact">
+            <Icon name="award" size={17} />
+            <span>{t.about.facts.master}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mascot-wrap" data-reveal id="mascot-mount" role="img" aria-label={t.a11y.mascot}>
+        <span class="mascot-hint">{t.about.mascotHint}</span>
+      </div>
+    </div>
+  </div>
+</section>

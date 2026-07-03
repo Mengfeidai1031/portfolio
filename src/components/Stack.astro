@@ -1,0 +1,37 @@
+---
+// Stack técnico agrupado por categoría, con iconos SVG autoalojados.
+import { stackGroups } from '../data/stack';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section section-alt" id="stack">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="kicker">02</p>
+      <h2>{t.stack.title}</h2>
+      <p class="sub">{t.stack.subtitle}</p>
+    </div>
+
+    <div class="stack-groups">
+      {stackGroups.map((group) => (
+        <div class="stack-group" data-reveal>
+          <h3>{t.stack.groups[group.key]}</h3>
+          <div class="stack-items">
+            {group.items.map((item) => (
+              <div class="stack-item">
+                <img src={`/icons/${item.icon}.svg`} alt={item.name} width="44" height="44" loading="lazy" />
+                <span>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

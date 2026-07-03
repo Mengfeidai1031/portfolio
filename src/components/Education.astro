@@ -1,0 +1,57 @@
+---
+// Formación (estudios) y certificaciones con enlace al PDF descargable.
+import Icon from './Icon.astro';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="education">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="kicker">05</p>
+      <h2>{t.education.title}</h2>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-col" data-reveal>
+        <h3>{t.education.degreesTitle}</h3>
+        <div class="edu-list">
+          {t.education.degrees.map((d) => (
+            <article class="edu-item card">
+              <h4>{d.name}</h4>
+              <p class="where">{d.school}</p>
+              <p class="when">{d.period}</p>
+              <p>{d.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="edu-col" data-reveal>
+        <h3>{t.education.certsTitle}</h3>
+        <div class="edu-list">
+          {t.education.certs.map((c) => (
+            <a class="cert-item card" href={c.file} target="_blank" rel="noopener noreferrer">
+              <span class="cert-icon" aria-hidden="true">
+                <Icon name="award" size={20} />
+              </span>
+              <span class="txt">
+                <strong>{c.name}</strong>
+                <span>{c.issuer} · {c.date}</span>
+              </span>
+              <span class="pdf">
+                <Icon name="file-text" size={15} />
+                {t.education.viewPdf}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

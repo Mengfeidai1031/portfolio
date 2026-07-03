@@ -1,0 +1,71 @@
+---
+// Barra de navegación fija: marca, enlaces de sección, selector de idioma
+// (con banderas SVG de flag-icons), toggle de tema y menú móvil.
+import Icon from './Icon.astro';
+import { localeMeta, localePath, locales, type Locale } from '../i18n';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  locale: Locale;
+  t: Translation;
+}
+
+const { locale, t } = Astro.props;
+
+const sections = [
+  { id: 'about', label: t.nav.about },
+  { id: 'stack', label: t.nav.stack },
+  { id: 'experience', label: t.nav.experience },
+  { id: 'projects', label: t.nav.projects },
+  { id: 'education', label: t.nav.education },
+  { id: 'contact', label: t.nav.contact },
+];
+---
+
+<header class="navbar" id="navbar">
+  <div class="container">
+    <a class="nav-brand" href={localePath(locale)} aria-label="Meng Fei Dai">
+      mengfei<span class="dot">.</span>dai
+    </a>
+
+    <nav aria-label="principal">
+      <ul class="nav-links">
+        {sections.map((s) => (
+          <li><a href={`#${s.id}`}>{s.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <details class="lang-menu" id="lang-menu">
+        <summary aria-label={t.nav.changeLanguage}>
+          <span class={`fi fi-${localeMeta[locale].flag}`} aria-hidden="true"></span>
+          {localeMeta[locale].code}
+          <Icon name="chevron-down" size={14} />
+        </summary>
+        <div class="menu">
+          {locales.map((l) => (
+            <a href={localePath(l)} aria-current={l === locale ? 'true' : undefined} lang={l === 'zh' ? 'zh-Hans' : l}>
+              <span class={`fi fi-${localeMeta[l].flag}`} aria-hidden="true"></span>
+              {localeMeta[l].code} — {localeMeta[l].label}
+            </a>
+          ))}
+        </div>
+      </details>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label={t.nav.toggleTheme}>
+        <Icon name="moon" size={17} class="icon-moon" />
+        <Icon name="sun" size={17} class="icon-sun" />
+      </button>
+
+      <button class="nav-burger" id="nav-burger" aria-label={t.nav.openMenu} aria-expanded="false" aria-controls="mobile-panel">
+        <Icon name="menu" size={20} class="icon-open" />
+        <Icon name="close" size={20} class="icon-close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mobile-panel">
+  {sections.map((s) => <a href={`#${s.id}`}>{s.label}</a>)}
+</div>

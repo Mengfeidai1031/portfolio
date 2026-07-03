@@ -1,0 +1,38 @@
+---
+// Contacto: email, CV y redes.
+import Icon from './Icon.astro';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-box" data-reveal>
+      <p class="kicker" style="justify-content: center; display: flex;">07</p>
+      <h2>{t.contact.title}</h2>
+      <p>{t.contact.subtitle}</p>
+
+      <div class="contact-ctas">
+        <a class="btn btn-primary" href="mailto:mengfeidai713@gmail.com">
+          <Icon name="mail" size={17} />
+          {t.contact.emailCta}
+        </a>
+        <a class="btn btn-ghost" href="/cv/cv-meng-fei-dai.pdf" download={t.a11y.cvFileName}>
+          <Icon name="download" size={17} />
+          {t.contact.cvCta}
+        </a>
+        <a class="btn-icon" href="https://github.com/Mengfeidai1031" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <Icon name="github" size={19} />
+        </a>
+        <a class="btn-icon" href="https://www.linkedin.com/in/meng-fei" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <Icon name="linkedin" size={19} />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

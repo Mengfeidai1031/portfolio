@@ -1,0 +1,36 @@
+---
+// Idiomas (sin barras de porcentaje: nombre + nivel) y otros datos.
+import Icon from './Icon.astro';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section section-alt" id="languages">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="kicker">06</p>
+      <h2>{t.languages.title}</h2>
+    </div>
+
+    <div class="lang-grid" data-reveal>
+      {t.languages.items.map((lang) => (
+        <div class="lang-card card">
+          <Icon name="globe" size={21} />
+          <div>
+            <strong>{lang.name}</strong>
+            <span>{lang.level}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="extra-list" data-reveal>
+      {t.languages.extra.map((item) => <span class="chip chip-muted">{item}</span>)}
+    </div>
+  </div>
+</section>

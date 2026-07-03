@@ -1,0 +1,101 @@
+---
+// Sección estrella: proyecto destacado (Vexis), cuadrícula de proyectos
+// y tira compacta de "más proyectos".
+import Icon from './Icon.astro';
+import { featuredProject, gridProjects, moreProjects } from '../data/projects';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+const featured = t.projects.items[featuredProject.slug];
+---
+
+<section class="section section-alt" id="projects">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="kicker">04</p>
+      <h2>{t.projects.title}</h2>
+      <p class="sub">{t.projects.subtitle}</p>
+    </div>
+
+    {/* Proyecto destacado */}
+    <article class="featured card" data-reveal>
+      <div class="featured-cover" aria-hidden="true">
+        <span class="monogram">{featuredProject.monogram}</span>
+      </div>
+      <div class="featured-body">
+        <span class="featured-badge">{t.projects.featuredBadge}</span>
+        <h3>{featured.name}</h3>
+        <p>{featured.description}</p>
+        <ul>
+          {featured.highlights?.map((h) => <li>{h}</li>)}
+        </ul>
+        <div class="chips">
+          {featuredProject.tech.map((tech) => <span class="chip">{tech}</span>)}
+        </div>
+        <div class="project-links">
+          <a class="btn btn-primary" href={featuredProject.demo} target="_blank" rel="noopener noreferrer">
+            <Icon name="external-link" size={16} />
+            {t.projects.demo}
+          </a>
+          <a class="btn btn-ghost" href={featuredProject.repo} target="_blank" rel="noopener noreferrer">
+            <Icon name="github" size={16} />
+            {t.projects.repo}
+          </a>
+        </div>
+      </div>
+    </article>
+
+    {/* Cuadrícula de proyectos */}
+    <div class="projects-grid">
+      {gridProjects.map((p) => {
+        const text = t.projects.items[p.slug];
+        return (
+          <article class="project-card card" data-reveal>
+            <div class="project-cover">
+              <span class="monogram" aria-hidden="true">{p.monogram}</span>
+              <div class="cover-links">
+                <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label={`${text.name} — GitHub`}>
+                  <Icon name="github" size={16} />
+                </a>
+                {p.demo && (
+                  <a href={p.demo} target="_blank" rel="noopener noreferrer" aria-label={`${text.name} — demo`}>
+                    <Icon name="external-link" size={16} />
+                  </a>
+                )}
+              </div>
+            </div>
+            <div class="project-body">
+              <h3>{text.name}</h3>
+              <p>{text.description}</p>
+              <div class="chips">
+                {p.tech.map((tech) => <span class="chip chip-muted">{tech}</span>)}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    {/* Más proyectos */}
+    <h3 class="more-title" data-reveal>{t.projects.moreTitle}</h3>
+    <div class="more-list" data-reveal>
+      {moreProjects.map((p) => {
+        const text = t.projects.items[p.slug];
+        return (
+          <a class="more-item card" href={p.repo} target="_blank" rel="noopener noreferrer">
+            <span class="mono" aria-hidden="true">{p.monogram}</span>
+            <span class="txt">
+              <strong>{text.name}</strong>
+              <span>{p.tech.join(' · ')}</span>
+            </span>
+            <Icon name="arrow-up-right" size={17} />
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

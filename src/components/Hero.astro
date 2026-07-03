@@ -1,0 +1,45 @@
+---
+// Hero con fondo generativo Three.js (montado en #hero-bg por scripts/hero-bg.ts).
+import Icon from './Icon.astro';
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="hero" id="home">
+  <div class="hero-canvas" id="hero-bg" aria-hidden="true"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <div class="hero-content container">
+    <p class="hero-greeting">{t.hero.greeting}</p>
+    <h1 class="hero-name">{t.hero.name}</h1>
+    <p class="hero-role">{t.hero.role}</p>
+    <p class="hero-pitch">{t.hero.pitch}</p>
+
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#projects">
+        {t.hero.ctaProjects}
+        <Icon name="arrow-up-right" size={17} />
+      </a>
+      <a class="btn btn-ghost" href="/cv/cv-meng-fei-dai.pdf" download={t.a11y.cvFileName}>
+        <Icon name="download" size={17} />
+        {t.hero.ctaCv}
+      </a>
+      <a class="btn-icon" href="https://github.com/Mengfeidai1031" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <Icon name="github" size={19} />
+      </a>
+      <a class="btn-icon" href="https://www.linkedin.com/in/meng-fei" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <Icon name="linkedin" size={19} />
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>{t.hero.scrollHint}</span>
+    <Icon name="chevron-down" size={17} />
+  </div>
+</section>

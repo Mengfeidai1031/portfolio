@@ -1,0 +1,39 @@
+---
+// Experiencia laboral en formato timeline.
+import type { Translation } from '../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="kicker">03</p>
+      <h2>{t.experience.title}</h2>
+      <p class="sub">{t.experience.subtitle}</p>
+    </div>
+
+    <div class="timeline">
+      {t.experience.jobs.map((job) => (
+        <article class="job card" data-reveal>
+          <div class="job-head">
+            <h3>{job.role}</h3>
+            <span class="job-company">{job.company}</span>
+            {job.badge && <span class="job-badge">{job.badge}</span>}
+          </div>
+          <p class="job-period">{job.period}</p>
+          <ul>
+            {job.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+          <div class="chips">
+            {job.tech.map((tech) => <span class="chip chip-muted">{tech}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
