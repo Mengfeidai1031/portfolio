@@ -235,19 +235,25 @@ export function initMascot(mount: HTMLElement): void {
     // Antena: balanceo idle + giro extra en hover.
     antenna.rotation.z = Math.sin(t * 2.4) * 0.1 + hover * Math.sin(t * 9) * 0.25;
 
-    // Brazos en reposo: balanceo lateral suave (eje Z, en el plano de la
-    // pantalla) en espejo perfecto entre los dos. Nada de giro en el eje de
-    // profundidad (X): con la cámara casi de frente, ese giro escorza el
-    // brazo y da la sensación óptica de que el hombro está "hacia atrás".
-    const idleSway = Math.sin(t * 1.3) * 0.09;
-    armL.rotation.x = 0;
-    armL.rotation.z = 0.14 + idleSway;
+    // Brazos en reposo: balanceo lateral (eje Z, en el plano de la pantalla)
+    // en espejo perfecto entre los dos, combinando dos frecuencias para que
+    // no se note repetitivo. Un pequeño matiz de profundidad (eje X) se
+    // aplica EN SINCRONÍA (mismo signo en ambos brazos, no en contrafase):
+    // así se mueven juntos, "respirando", sin que ninguno parezca quedarse
+    // atrás respecto al otro.
+    const swayMain = Math.sin(t * 1.3) * 0.17;
+    const swaySecondary = Math.sin(t * 0.7 + 1.1) * 0.06;
+    const idleSway = swayMain + swaySecondary;
+    const idleBob = Math.sin(t * 1.3 + Math.PI / 2) * 0.08;
+
+    armL.rotation.x = idleBob;
+    armL.rotation.z = 0.16 + idleSway;
 
     // Saludo: brazo arriba y hacia AFUERA (junto a la cabeza, no detrás),
     // con un ligero giro hacia la cámara para que salude "mirándote".
     const wave = hover * (2.3 + Math.sin(t * 8) * 0.35);
-    armR.rotation.x = hover * 0.25;
-    armR.rotation.z = (-0.14 - idleSway) * (1 - hover) + wave;
+    armR.rotation.x = idleBob * (1 - hover) + hover * 0.25;
+    armR.rotation.z = (-0.16 - idleSway) * (1 - hover) + wave;
 
     // Parpadeo cada ~3,6 s.
     const cycle = t % 3.6;
