@@ -154,6 +154,11 @@ export const zh: Translation = {
         name: 'Java Playground',
         description: '设计与重构练习（kata），以及一些小型 Java 桌面应用。',
       },
+      // REVISAR
+      aiplayground: {
+        name: 'AI Playground',
+        description: '经典搜索算法（BFS、DFS、分支限界）与 PyTorch 图像分类器，通过迁移学习将准确率从 77% 提升到 89%。',
+      },
     },
   },
   education: {

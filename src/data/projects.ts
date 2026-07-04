@@ -86,4 +86,10 @@ export const moreProjects: ProjectMeta[] = [
     tech: ['Java'],
     monogram: 'J',
   },
+  {
+    slug: 'aiplayground',
+    repo: 'https://github.com/Mengfeidai1031/ai-playground',
+    tech: ['Python', 'PyTorch'],
+    monogram: 'A',
+  },
 ];

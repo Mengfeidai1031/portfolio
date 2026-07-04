@@ -142,6 +142,11 @@ export const en: Translation = {
         name: 'Java Playground',
         description: 'Design and refactoring katas, plus small Java desktop applications.',
       },
+      aiplayground: {
+        name: 'AI Playground',
+        description:
+          'Classic search algorithms (BFS, DFS, Branch & Bound) and CNN image classifiers in PyTorch, from 77% to 89% accuracy with transfer learning.',
+      },
     },
   },
   education: {

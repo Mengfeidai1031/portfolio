@@ -143,6 +143,11 @@ export const es: Translation = {
         name: 'Java Playground',
         description: 'Katas de diseño y refactorización, y pequeñas aplicaciones Java de escritorio.',
       },
+      aiplayground: {
+        name: 'AI Playground',
+        description:
+          'Algoritmos de búsqueda clásicos (BFS, DFS, Branch & Bound) y clasificadores de imágenes con CNN en PyTorch, del 77 % al 89 % de precisión con transfer learning.',
+      },
     },
   },
   education: {
