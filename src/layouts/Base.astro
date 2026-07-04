@@ -26,7 +26,9 @@ const canonical = `${site}${localePath(locale)}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{t.meta.title}</title>
+    {/* Pestaña del navegador: solo el nombre. El título completo (con el
+    pitch) se reserva para Open Graph, al compartir el enlace. */}
+    <title>Meng Fei Dai</title>
     <meta name="description" content={t.meta.description} />
     <meta name="author" content="Meng Fei Dai" />
     <link rel="canonical" href={canonical} />
