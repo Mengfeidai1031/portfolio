@@ -245,14 +245,18 @@ export function initMascot(mount: HTMLElement): void {
     const swingSecondary = Math.sin(t * 0.7 + 1.1) * 0.08;
     const idleSwing = swingMain + swingSecondary;
 
+    // Ángulo de reposo NEGATIVO en el brazo izquierdo (y positivo en el
+    // derecho) separa las manos del cuerpo hacia afuera ( /\ ); en positivo
+    // (izq.) / negativo (dcha.) las manos se cruzan hacia el centro ( \/ ),
+    // que es justo el aspecto poco natural que había antes.
     armL.rotation.x = idleSwing;
-    armL.rotation.z = 0.16;
+    armL.rotation.z = -0.24;
 
     // Saludo: brazo arriba y hacia AFUERA (junto a la cabeza, no detrás),
     // con un ligero giro hacia la cámara para que salude "mirándote".
     const wave = hover * (2.3 + Math.sin(t * 8) * 0.35);
     armR.rotation.x = idleSwing * (1 - hover) + hover * 0.25;
-    armR.rotation.z = -0.16 * (1 - hover) + wave;
+    armR.rotation.z = 0.24 * (1 - hover) + wave;
 
     // Parpadeo cada ~3,6 s.
     const cycle = t % 3.6;
