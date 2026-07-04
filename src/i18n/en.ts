@@ -37,7 +37,7 @@ export const en: Translation = {
       location: 'Gran Canaria, Spain',
       role: 'Full Stack at Grupo Ari Motor',
       degree: 'Computer Engineering — ULPGC',
-      master: 'Web Dev Master — UOC (ongoing)',
+      master: 'Web Dev Master — UOC (from Sep 2026)',
     },
     mascotHint: 'Hover over it',
   },

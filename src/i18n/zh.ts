@@ -48,7 +48,7 @@ export const zh: Translation = {
       location: '西班牙大加那利岛',
       role: 'Grupo Ari Motor 全栈开发',
       degree: '计算机工程 — ULPGC',
-      master: 'Web 开发硕士 — UOC（在读）',
+      master: 'Web 开发硕士 — UOC（2026年9月起）',
     },
     mascotHint: '把鼠标移到它身上试试',
   },
