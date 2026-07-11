@@ -11,10 +11,10 @@ import type { Translation } from './types';
 // del sitio conoce los caracteres correctos de su nombre.
 export const zh: Translation = {
   meta: {
-    title: 'Meng Fei Dai — 全栈开发工程师',
+    title: 'Meng Fei Dai — 软件工程师',
     // REVISAR: descripción SEO.
     description:
-      'Meng Fei Dai 的个人作品集：计算机工程师、全栈开发者，技术栈涵盖 Laravel、React、Node.js 与 AWS。项目、经历与联系方式。',
+      'Meng Fei Dai 的个人作品集：软件工程师（全栈与 DevOps），计算机工程专业毕业，技术栈涵盖 Laravel、React、Node.js 与 AWS。项目、经历与联系方式。',
     ogLocale: 'zh_CN',
   },
   nav: {
@@ -32,7 +32,7 @@ export const zh: Translation = {
   hero: {
     greeting: '你好，我是',
     name: 'Meng Fei Dai',
-    role: '全栈开发工程师 · 计算机工程师',
+    role: '软件工程师 · 全栈与 DevOps · 计算机工程专业毕业',
     // REVISAR: frase de presentación principal.
     pitch: '我构建端到端的 Web 应用：从数据模型到生产环境部署。',
     ctaProjects: '查看项目',

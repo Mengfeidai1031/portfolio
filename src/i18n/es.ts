@@ -3,9 +3,9 @@ import type { Translation } from './types';
 // Español — idioma por defecto del sitio.
 export const es: Translation = {
   meta: {
-    title: 'Meng Fei Dai — Desarrollador Full Stack',
+    title: 'Meng Fei Dai — Ingeniero de Software',
     description:
-      'Portfolio de Meng Fei Dai, ingeniero informático y desarrollador full stack: Laravel, React, Node.js y AWS. Proyectos, experiencia y contacto.',
+      'Portfolio de Meng Fei Dai, Ingeniero de Software (Full-Stack & DevOps) y graduado en Ingeniería Informática: Laravel, React, Node.js y AWS. Proyectos, experiencia y contacto.',
     ogLocale: 'es_ES',
   },
   nav: {
@@ -23,7 +23,7 @@ export const es: Translation = {
   hero: {
     greeting: 'Hola, soy',
     name: 'Meng Fei Dai',
-    role: 'Desarrollador Full Stack · Ingeniero Informático',
+    role: 'Ingeniero de Software · Full-Stack & DevOps · Graduado en Ingeniería Informática',
     pitch:
       'Construyo aplicaciones web de principio a fin: del modelo de datos al despliegue en producción.',
     ctaProjects: 'Ver proyectos',

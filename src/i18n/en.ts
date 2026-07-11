@@ -3,9 +3,9 @@ import type { Translation } from './types';
 // English translation.
 export const en: Translation = {
   meta: {
-    title: 'Meng Fei Dai — Full-Stack Developer',
+    title: 'Meng Fei Dai — Software Engineer',
     description:
-      'Portfolio of Meng Fei Dai, computer engineer and full-stack developer working with Laravel, React, Node.js and AWS. Projects, experience and contact.',
+      'Portfolio of Meng Fei Dai, Software Engineer (Full-Stack & DevOps) and Computer Engineering graduate working with Laravel, React, Node.js and AWS. Projects, experience and contact.',
     ogLocale: 'en_GB',
   },
   nav: {
@@ -23,7 +23,7 @@ export const en: Translation = {
   hero: {
     greeting: "Hi, I'm",
     name: 'Meng Fei Dai',
-    role: 'Full-Stack Developer · Computer Engineer',
+    role: 'Software Engineer · Full-Stack & DevOps · Computer Engineering Graduate',
     pitch: 'I build web applications end to end: from the data model to production deployment.',
     ctaProjects: 'View projects',
     ctaCv: 'Download CV',
